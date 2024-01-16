@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: eureka-server  #uygulama ismi
+    profiles:
+      active: localhost
+
+---
+
+spring:
+  profiles: localhost
+
+info:
+  component: Eureka Server - Github - Localhost
+
+eureka:
+  instance:
+    appname: eureka-server #eureka clientlar tarafından serverın bulunması ve iletişim kurulması için. bu isimle eureka server'a register olunacak
+    hostname: eureka-server #eureka server ana makine adı
+    prefer-ip-address: true
+  client:
+    register-with-eureka: false #uygulamanın eureka-server'a servis olarak kendini kaydedip kaydetmeyeceği
+    fetch-registry: false #uygulamanın başlangıçta servis register'larını alıp almayacağı için. false ise almayacak
+    service-url:
+      default-zone: http://${eureka.instance.hostname}:${server.port}/eureka # servis register'ı url'i
+
+server:
+  port: 8763
+
+---
+spring:
+  profiles: stage
+
+info:
+  component: Eureka Server - Github - Localhost
+
+eureka:
+  instance:
+    appname: eureka-server #eureka clientlar tarafından serverın bulunması ve iletişim kurulması için. bu isimle eureka server'a register olunacak
+    hostname: eureka-server #eureka server ana makine adı
+    prefer-ip-address: true
+  client:
+    register-with-eureka: false #uygulamanın eureka-server'a servis olarak kendini kaydedip kaydetmeyeceği
+    fetch-registry: false #uygulamanın başlangıçta servis register'larını alıp almayacağı için. false ise almayacak
+    service-url:
+      default-zone: http://${eureka.instance.hostname}:${server.port}/eureka # servis register'ı url'i
+
+server:
+  port: 8765

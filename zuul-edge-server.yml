@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: zuul-edge-server
+  profiles:
+    active: localhost
+
+info:
+  component: Zuul Edge Server
+
+---
+spring:
+  profiles: localhost
+
+eureka:
+  client:
+    service-url:
+      defaul-zone: http://localhost:8761/eureka  #bağlanılması gereken eureka-server'in url'i
+  instance:
+    instance-id: ${spring.application.name}:${random.uuid}
+
+
+---
+spring:
+  profiles: stage
+
+eureka:
+  client:
+    service-url:
+      defaul-zone: http://eureka-server:8761/eureka
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 10
+    instance-id: ${spring.application.name}:${random.uuid}
